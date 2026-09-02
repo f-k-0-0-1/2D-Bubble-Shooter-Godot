@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dewse8vvwb1to"]
+
+[ext_resource type="Script" uid="uid://4y5jpnkoft1f" path="res://scripts/level_data.gd" id="1_3et5p"]
+
+[resource]
+script = ExtResource("1_3et5p")
+level_number = 3
+available_colors = 5
+shot_limit = 25
+bubble_layout = Array[String](["RRBGG", "RBGGY", "BBYYR"])

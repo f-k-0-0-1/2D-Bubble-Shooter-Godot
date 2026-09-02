@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://fdut5xvxbqqa"]
+
+[ext_resource type="Script" uid="uid://lae0p7bin8g7" path="res://scripts/game.gd" id="1_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://uplric1p2p52" path="res://assets/circle-dashed-6-256.png" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://dwjbk8ed0lso" path="res://scripts/LevelManager.gd" id="2_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://021c7niylipb" path="res://assets/back_arrow.png" id="3_lbhrr"]
+[ext_resource type="Script" uid="uid://bqvx7x7eear2u" path="res://scripts/launcher.gd" id="3_p57ef"]
+[ext_resource type="Script" uid="uid://bxuov3g1wo80p" path="res://scripts/bubble_board.gd" id="4_iywne"]
+
+[sub_resource type="Gradient" id="Gradient_bqqt6"]
+colors = PackedColorArray(0, 0.122595854, 0.3731352, 1, 0.0033645032, 0.016225923, 0.08472269, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8cj0n"]
+gradient = SubResource("Gradient_bqqt6")
+fill = 1
+fill_from = Vector2(0.5, 0.6)
+
+[node name="Game" type="Control" unique_id=1277333420]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lnu2h")
+
+[node name="ColorRect" type="TextureRect" parent="." unique_id=1942637125]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_8cj0n")
+
+[node name="LevelManager" type="Node" parent="." unique_id=141650820]
+script = ExtResource("2_lbhrr")
+
+[node name="Launcher" type="Control" parent="." unique_id=355429723]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_p57ef")
+
+[node name="Sprite2D" type="Sprite2D" parent="Launcher" unique_id=2052968466]
+position = Vector2(0, -313)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_uwrxv")
+
+[node name="AimGuide" type="Line2D" parent="Launcher" unique_id=303638745]
+
+[node name="BubbleSpawnPoint" type="Marker2D" parent="Launcher" unique_id=318146990]
+position = Vector2(-1.543457, -311.5929)
+
+[node name="BubbleBoard" type="Node2D" parent="." unique_id=1232069694]
+script = ExtResource("4_iywne")
+
+[node name="Bubbles" type="Node2D" parent="BubbleBoard" unique_id=325914882]
+
+[node name="BackTextureButton" type="TextureButton" parent="." unique_id=1111992316]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(60, 60)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 41.0
+offset_right = 108.0
+offset_bottom = 101.0
+texture_normal = ExtResource("3_lbhrr")
+texture_pressed = ExtResource("3_lbhrr")
+texture_hover = ExtResource("3_lbhrr")
+stretch_mode = 5
