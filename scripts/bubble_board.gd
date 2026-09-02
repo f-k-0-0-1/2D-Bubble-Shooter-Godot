@@ -103,11 +103,7 @@ func get_bubbles() -> Array:
 # ATTACH TO HIT BUBBLE
 # ==================================================
 
-func attach_bubble(
-	bubble: Area2D,
-	hit_bubble: Area2D
-) -> void:
-
+func attach_bubble(bubble: Area2D, hit_bubble: Area2D) -> void:
 	if bubble == null:
 		return
 
@@ -121,37 +117,31 @@ func attach_bubble(
 		attach_to_top(bubble)
 		return
 
-	# Find the empty neighbor that is closest
-	# to the projectile's actual position.
-	var best_cell: Vector2i = find_best_neighbor_cell(
-		hit_cell.y,
-		hit_cell.x,
-		bubble.global_position
-	)
+	# Find the empty neighbor that is closest to the projectile's position
+	var best_cell: Vector2i = find_best_neighbor_cell(hit_cell.y, hit_cell.x, bubble.global_position)
 
+	# FIXED: If the hit bubble is fully surrounded (like in a corner), use the fallback
 	if best_cell.x < 0:
-		return
+		best_cell = find_closest_empty_cell(bubble.global_position)
+		if best_cell.x < 0:
+			bubble.queue_free() # The entire board is 100% full
+			return
 
 	var row: int = best_cell.y
 	var column: int = best_cell.x
 
 	ensure_grid_row(row)
-
 	grid[row][column] = bubble
 
-	# Move bubble into board.
+	# Move bubble into board
 	var old_parent: Node = bubble.get_parent()
-
 	if old_parent != bubbles_container:
-
 		if old_parent != null:
 			old_parent.remove_child(bubble)
-
 		bubbles_container.add_child(bubble)
 
-	# Snap exactly to the selected position.
+	# Snap exactly to the selected position
 	bubble.position = grid_to_position(row, column)
-
 	check_matches(row, column)
 
 
@@ -160,7 +150,6 @@ func attach_bubble(
 # ==================================================
 
 func find_bubble_cell(target: Area2D) -> Vector2i:
-
 	for row in range(grid.size()):
 		for column in range(MAX_COLUMNS):
 			var bubble: Area2D = grid[row][column] as Area2D
@@ -174,29 +163,17 @@ func find_bubble_cell(target: Area2D) -> Vector2i:
 # FIND BEST NEIGHBOR
 # ==================================================
 
-func find_best_neighbor_cell(
-	row: int,
-	column: int,
-	world_position: Vector2
-) -> Vector2i:
-
+func find_best_neighbor_cell(row: int, column: int, world_position: Vector2) -> Vector2i:
 	var candidates: Array[Vector2i] = []
 
 	for neighbor in get_neighbors(row, column):
 		var neighbor_column: int = neighbor.x
 		var neighbor_row: int = neighbor.y
 
-		if neighbor_row < 0:
-			continue
-
-		if neighbor_column < 0:
-			continue
-
-		if neighbor_column >= MAX_COLUMNS:
+		if neighbor_row < 0 or neighbor_column < 0 or neighbor_column >= MAX_COLUMNS:
 			continue
 
 		ensure_grid_row(neighbor_row)
-
 		var existing: Area2D = grid[neighbor_row][neighbor_column] as Area2D
 
 		if existing == null:
@@ -205,9 +182,8 @@ func find_best_neighbor_cell(
 	if candidates.is_empty():
 		return Vector2i(-1, -1)
 
-	# Convert projectile position to board-local coordinates.
+	# Convert projectile position to board-local coordinates
 	var local_position: Vector2 = to_local(world_position)
-
 	var best_cell: Vector2i = candidates[0]
 	var best_distance: float = INF
 
@@ -223,13 +199,39 @@ func find_best_neighbor_cell(
 
 
 # ==================================================
+# FIND CLOSEST EMPTY CELL (FALLBACK)
+# ==================================================
+
+func find_closest_empty_cell(world_position: Vector2) -> Vector2i:
+	var local_position: Vector2 = to_local(world_position)
+	var best_cell: Vector2i = Vector2i(-1, -1)
+	var best_distance: float = INF
+
+	# Search the current grid plus one empty row below it
+	var max_row: int = grid.size() + 1
+
+	for r in range(max_row):
+		for c in range(MAX_COLUMNS):
+			# Skip occupied cells
+			if r < grid.size() and grid[r][c] != null:
+				continue 
+
+			var cell_pos: Vector2 = grid_to_position(r, c)
+			var distance: float = local_position.distance_to(cell_pos)
+
+			if distance < best_distance:
+				best_distance = distance
+				best_cell = Vector2i(c, r)
+
+	return best_cell
+
+
+# ==================================================
 # TOP ATTACHMENT
 # ==================================================
 
 func attach_to_top(bubble: Area2D) -> void:
-
 	var local_position: Vector2 = to_local(bubble.global_position)
-
 	ensure_grid_row(0)
 
 	var best_column: int = -1
@@ -237,7 +239,6 @@ func attach_to_top(bubble: Area2D) -> void:
 
 	for column in range(MAX_COLUMNS):
 		var existing: Area2D = grid[0][column] as Area2D
-
 		if existing != null:
 			continue
 
@@ -248,16 +249,35 @@ func attach_to_top(bubble: Area2D) -> void:
 			best_distance = distance
 			best_column = column
 
+	# FIXED: If row 0 is completely full, use the fallback
 	if best_column < 0:
+		var fallback_cell: Vector2i = find_closest_empty_cell(bubble.global_position)
+		if fallback_cell.x < 0:
+			bubble.queue_free()
+			return
+		
+		var row: int = fallback_cell.y
+		var column: int = fallback_cell.x
+		
+		ensure_grid_row(row)
+		grid[row][column] = bubble
+		
+		var old_parent: Node = bubble.get_parent()
+		if old_parent != bubbles_container:
+			if old_parent != null:
+				old_parent.remove_child(bubble)
+			bubbles_container.add_child(bubble)
+			
+		bubble.position = grid_to_position(row, column)
+		check_matches(row, column)
 		return
 
 	grid[0][best_column] = bubble
 
-	var old_parent: Node = bubble.get_parent()
-
-	if old_parent != bubbles_container:
-		if old_parent != null:
-			old_parent.remove_child(bubble)
+	var old_p: Node = bubble.get_parent()
+	if old_p != bubbles_container:
+		if old_p != null:
+			old_p.remove_child(bubble)
 		bubbles_container.add_child(bubble)
 
 	bubble.position = grid_to_position(0, best_column)
@@ -282,7 +302,6 @@ func ensure_grid_row(row: int) -> void:
 
 func check_matches(row: int, column: int) -> void:
 	var matches: Array = find_matching_bubbles(row, column)
-
 	if matches.size() >= 3:
 		remove_matches(matches)
 
@@ -291,11 +310,7 @@ func check_matches(row: int, column: int) -> void:
 # FIND MATCHES
 # ==================================================
 
-func find_matching_bubbles(
-	start_row: int,
-	start_column: int
-) -> Array:
-
+func find_matching_bubbles(start_row: int, start_column: int) -> Array:
 	var matches: Array = []
 
 	if not is_valid_cell(start_row, start_column):
@@ -307,7 +322,6 @@ func find_matching_bubbles(
 		return matches
 
 	var target_color = start_bubble.color
-
 	var queue: Array[Vector2i] = []
 	var visited: Dictionary = {}
 
