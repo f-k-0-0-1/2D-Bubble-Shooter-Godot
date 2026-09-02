@@ -74,7 +74,7 @@ func _process(delta: float) -> void:
 
 
 # =========================================================
-# INPUT (FIXED for Screen Transform)
+# INPUT
 # =========================================================
 
 func _input(event: InputEvent) -> void:
@@ -259,7 +259,8 @@ func find_first_bubble_on_path(origin: Vector2, direction: Vector2, max_distance
 	for bubble_variant in bubbles:
 		var bubble: Area2D = bubble_variant as Area2D
 
-		if bubble == null or bubble == shooting_bubble:
+		# FIXED: Ignore bubbles that are dying, falling, or already processed
+		if bubble == null or bubble == shooting_bubble or bubble.is_queued_for_deletion() or not bubble.visible:
 			continue
 
 		var bubble_position: Vector2 = bubble.global_position
@@ -347,7 +348,7 @@ func shoot() -> void:
 
 
 # =========================================================
-# MOVE SHOOTING BUBBLE (FIXED with Substeps)
+# MOVE SHOOTING BUBBLE
 # =========================================================
 
 func move_shooting_bubble(delta: float) -> void:
@@ -356,8 +357,11 @@ func move_shooting_bubble(delta: float) -> void:
 		return
 
 	var total_dist: float = shoot_speed * delta
+	if total_dist <= 0.001:
+		return
+		
 	var step_size: float = 20.0
-	var steps: int = ceil(total_dist / step_size)
+	var steps: int = int(ceil(total_dist / step_size))
 	var per_step: float = total_dist / steps
 
 	for i in range(steps):
@@ -385,7 +389,7 @@ func move_shooting_bubble(delta: float) -> void:
 
 
 # =========================================================
-# CHECK BUBBLE COLLISION (FIXED fading bubbles)
+# CHECK BUBBLE COLLISION
 # =========================================================
 
 func check_bubble_collision() -> bool:
@@ -402,8 +406,8 @@ func check_bubble_collision() -> bool:
 		if bubble == null or bubble == shooting_bubble:
 			continue
 
-		# Ignore dying/fading bubbles
-		if not bubble.is_visible_in_tree() or bubble.scale.x < 0.8:
+		# FIXED: Properly ignore bubbles that are dying or falling
+		if bubble.is_queued_for_deletion() or not bubble.visible:
 			continue
 
 		var distance: float = shooting_bubble.global_position.distance_to(bubble.global_position)
