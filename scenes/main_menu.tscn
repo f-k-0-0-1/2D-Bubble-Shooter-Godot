@@ -4,6 +4,8 @@
 [ext_resource type="FontFile" uid="uid://cnj87afgw8qyp" path="res://Fonts/LilitaOne-Regular.ttf" id="1_wu84c"]
 [ext_resource type="StyleBox" uid="uid://c4xm5rqj08u42" path="res://styles/menu_button_style.tres" id="2_8ln24"]
 [ext_resource type="FontFile" uid="uid://cggqbpv0ye234" path="res://Fonts/Super Bouncer.ttf" id="4_oa1go"]
+[ext_resource type="Texture2D" uid="uid://bp2xvyluafhwe" path="res://assets/stroke_circle.png" id="5_8ln24"]
+[ext_resource type="Texture2D" uid="uid://cfx71wpbclpqq" path="res://assets/waves.png" id="6_rtw2f"]
 
 [sub_resource type="Gradient" id="Gradient_wu84c"]
 colors = PackedColorArray(0, 0.122595854, 0.3731352, 1, 0.0033645032, 0.016225923, 0.08472269, 1)
@@ -14,6 +16,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.6)
 
 [node name="main_menu" type="Control" unique_id=624199424]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,6 +33,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_qbdj3")
+
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=797394560]
+modulate = Color(1, 1, 1, 0.1882353)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.061000004
+anchor_right = 1.021
+anchor_bottom = 1.3840001
+offset_left = 6.920002
+offset_top = 837.0
+offset_right = -0.11999512
+offset_bottom = 0.47998047
+texture = ExtResource("6_rtw2f")
+flip_v = true
 
 [node name="PlayButton" type="Button" parent="." unique_id=1668223547]
 custom_minimum_size = Vector2(300, 100)
@@ -125,6 +142,42 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Aim.  Shoot. Pop!"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1920231243]
+modulate = Color(1, 1, 1, 0.1882353)
+custom_minimum_size = Vector2(200, 0)
+custom_maximum_size = Vector2(600, 600)
+layout_mode = 0
+offset_left = 404.0
+offset_top = -270.0
+offset_right = 1004.0
+offset_bottom = 330.0
+texture = ExtResource("5_8ln24")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1718802255]
+modulate = Color(1, 1, 1, 0.1882353)
+custom_minimum_size = Vector2(200, 0)
+custom_maximum_size = Vector2(400, 400)
+layout_mode = 0
+offset_left = -236.0
+offset_top = 512.0
+offset_right = 164.0
+offset_bottom = 912.0
+texture = ExtResource("5_8ln24")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=1078624692]
+modulate = Color(1, 1, 1, 0.1882353)
+custom_minimum_size = Vector2(200, 0)
+custom_maximum_size = Vector2(200, 200)
+layout_mode = 0
+offset_left = 628.0
+offset_top = 868.0
+offset_right = 828.0
+offset_bottom = 1068.0
+texture = ExtResource("5_8ln24")
+stretch_mode = 5
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
