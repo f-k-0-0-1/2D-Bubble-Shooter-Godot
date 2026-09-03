@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_8g6tw")
 level_number = 1
-layout = Array[String](["RRBB", "RBGG"])
+layout = Array[String](["..RRBB..", "..RBGG..", "..RGBR."])

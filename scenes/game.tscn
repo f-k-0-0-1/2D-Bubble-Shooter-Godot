@@ -6,14 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://021c7niylipb" path="res://assets/back_arrow.png" id="3_lbhrr"]
 [ext_resource type="Script" uid="uid://bqvx7x7eear2u" path="res://scripts/launcher.gd" id="3_p57ef"]
 [ext_resource type="Script" uid="uid://bxuov3g1wo80p" path="res://scripts/bubble_board.gd" id="4_iywne"]
+[ext_resource type="FontFile" uid="uid://cnj87afgw8qyp" path="res://Fonts/LilitaOne-Regular.ttf" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://c8uoeshtoqi7k" path="res://scripts/deadline.gd" id="8_gee14"]
 
-[sub_resource type="Gradient" id="Gradient_bqqt6"]
+[sub_resource type="Gradient" id="Gradient_0tnpc"]
 colors = PackedColorArray(0, 0.122595854, 0.3731352, 1, 0.0033645032, 0.016225923, 0.08472269, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8cj0n"]
-gradient = SubResource("Gradient_bqqt6")
+gradient = SubResource("Gradient_0tnpc")
 fill = 1
 fill_from = Vector2(0.5, 0.6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
+size = Vector2(20, 749.5)
 
 [node name="Game" type="Control" unique_id=1277333420]
 layout_mode = 3
@@ -76,3 +81,59 @@ texture_hover = ExtResource("3_lbhrr")
 stretch_mode = 5
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=344849617]
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=1796228131]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -169.0
+offset_top = 47.0
+offset_right = -23.0
+offset_bottom = 105.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.64705884, 0, 1)
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 40
+text = "00"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="." unique_id=1210400862]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -1280.0
+offset_right = -320.0
+offset_bottom = -1240.0
+
+[node name="Deadline" type="Area2D" parent="Control" unique_id=1194850566]
+position = Vector2(551, 47)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("8_gee14")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Deadline" unique_id=1004576578]
+position = Vector2(-184.75, 741)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_gee14")
+
+[node name="Label" type="Label" parent="Control" unique_id=1936913728]
+modulate = Color(1, 1, 1, 0.28235295)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = 711.0
+offset_right = 777.0
+offset_bottom = 794.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "--------------------------------------------"

@@ -1,0 +1,245 @@
+[gd_scene format=3 uid="uid://plijcrxuxum7"]
+
+[ext_resource type="FontFile" uid="uid://cnj87afgw8qyp" path="res://Fonts/LilitaOne-Regular.ttf" id="1_2jtsn"]
+[ext_resource type="Script" uid="uid://dgp0wc5nthjsc" path="res://scripts/game_over.gd" id="1_8bugq"]
+[ext_resource type="StyleBox" uid="uid://c4xm5rqj08u42" path="res://styles/menu_button_style.tres" id="2_8bugq"]
+[ext_resource type="Texture2D" uid="uid://b3jdla02e2lde" path="res://assets/Home_Icon.png" id="3_wawo4"]
+[ext_resource type="Texture2D" uid="uid://b06fxrcdhwciv" path="res://assets/circle-outline-128.png" id="4_56v3a"]
+[ext_resource type="Texture2D" uid="uid://8noo8el1be31" path="res://assets/grey-circle-outline-128.png" id="5_o57t2"]
+[ext_resource type="Texture2D" uid="uid://cfk81r7h6o4c6" path="res://assets/bubbles/red.png" id="6_uq3qu"]
+[ext_resource type="Texture2D" uid="uid://sgb4vtafcg7v" path="res://assets/bubbles/blue.png" id="7_0p6qk"]
+[ext_resource type="Texture2D" uid="uid://bi05rdtnpjy3c" path="res://assets/bubbles/purple.png" id="8_s4bmq"]
+
+[sub_resource type="Gradient" id="Gradient_gee14"]
+colors = PackedColorArray(0, 0.122595854, 0.3731352, 1, 0.0033645032, 0.016225923, 0.08472269, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r8nfu"]
+gradient = SubResource("Gradient_gee14")
+fill = 1
+fill_from = Vector2(0.5, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vumy4"]
+bg_color = Color(0.007843138, 0.06666667, 0.22745098, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.07450981, 0.16078432, 0.42352942, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+corner_detail = 20
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 20
+shadow_offset = Vector2(10, 10)
+
+[node name="Game Over" type="Control" unique_id=1568893493]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8bugq")
+
+[node name="ColorRect" type="TextureRect" parent="." unique_id=1156068065]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_r8nfu")
+
+[node name="Panel2" type="Panel" parent="." unique_id=1998966762]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -191.0
+offset_right = 257.5
+offset_bottom = 393.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vumy4")
+
+[node name="RetryButton" type="Button" parent="." unique_id=2105910701]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = 139.0
+offset_right = 191.0
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_2jtsn")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("2_8bugq")
+theme_override_styles/pressed = ExtResource("2_8bugq")
+theme_override_styles/hover = ExtResource("2_8bugq")
+theme_override_styles/focus = ExtResource("2_8bugq")
+text = "RETRY"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2064412577]
+custom_maximum_size = Vector2(47, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = 293.0
+offset_right = 23.5
+offset_bottom = 341.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_wawo4")
+stretch_mode = 5
+
+[node name="HomeButton" type="TextureButton" parent="." unique_id=1353510582]
+modulate = Color(0.023529412, 0.2, 0.5372549, 0.45882353)
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 253.0
+offset_right = 64.0
+offset_bottom = 381.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_56v3a")
+texture_pressed = ExtResource("4_56v3a")
+texture_disabled = ExtResource("5_o57t2")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="." unique_id=839464655]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = 72.0
+offset_right = 82.0
+offset_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.5137255, 0.6117647, 0.9411765, 1)
+theme_override_font_sizes/font_size = 30
+text = "You Loose!"
+
+[node name="Label2" type="Label" parent="." unique_id=234041462]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -112.0
+offset_right = 197.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_2jtsn")
+theme_override_font_sizes/font_size = 80
+text = "Game Over!"
+
+[node name="Control" type="Control" parent="." unique_id=838700476]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Control" unique_id=1497533974]
+custom_maximum_size = Vector2(140, 140)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -248.0
+offset_right = -26.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_uq3qu")
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="Control" unique_id=594619322]
+custom_maximum_size = Vector2(140, 140)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 26.0
+offset_top = -248.0
+offset_right = 166.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_0p6qk")
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=1737435625]
+custom_maximum_size = Vector2(180, 180)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -301.0
+offset_right = 90.0
+offset_bottom = -121.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_s4bmq")
+stretch_mode = 5
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=704790929]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = 12.0
+offset_right = 90.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.64705884, 0, 1)
+theme_override_fonts/font = ExtResource("1_2jtsn")
+theme_override_font_sizes/font_size = 35
+text = "SCORE: 290"

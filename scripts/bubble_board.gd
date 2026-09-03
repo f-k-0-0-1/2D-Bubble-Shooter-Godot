@@ -1,9 +1,11 @@
 extends Node2D
 
 const BUBBLE_SCENE = preload("res://scenes/bubble.tscn")
+# Ensure this path matches exactly where you saved your level complete scene
+const LEVEL_COMPLETE_SCENE = preload("res://scenes/level_complete.tscn") 
 
 @export var bubble_diameter: float = 85.0
-@export var board_offset: Vector2 = Vector2(200, 150)
+@export var board_offset: Vector2 = Vector2(20, 150)
 
 const MAX_COLUMNS: int = 8
 
@@ -120,7 +122,7 @@ func attach_bubble(bubble: Area2D, hit_bubble: Area2D) -> void:
 	# Find the empty neighbor that is closest to the projectile's position
 	var best_cell: Vector2i = find_best_neighbor_cell(hit_cell.y, hit_cell.x, bubble.global_position)
 
-	# FIXED: If the hit bubble is fully surrounded (like in a corner), use the fallback
+	# If the hit bubble is fully surrounded (like in a corner), use the fallback
 	if best_cell.x < 0:
 		best_cell = find_closest_empty_cell(bubble.global_position)
 		if best_cell.x < 0:
@@ -249,7 +251,7 @@ func attach_to_top(bubble: Area2D) -> void:
 			best_distance = distance
 			best_column = column
 
-	# FIXED: If row 0 is completely full, use the fallback
+	# If row 0 is completely full, use the fallback
 	if best_column < 0:
 		var fallback_cell: Vector2i = find_closest_empty_cell(bubble.global_position)
 		if fallback_cell.x < 0:
@@ -356,7 +358,7 @@ func find_matching_bubbles(start_row: int, start_column: int) -> Array:
 
 
 # ==================================================
-# NEIGHBORS (FIXED)
+# NEIGHBORS
 # ==================================================
 
 func get_neighbors(row: int, column: int) -> Array:
@@ -394,7 +396,7 @@ func is_valid_cell(row: int, column: int) -> bool:
 
 
 # ==================================================
-# REMOVE MATCHES (FIXED)
+# REMOVE MATCHES
 # ==================================================
 
 func remove_matches(matches: Array) -> void:
@@ -474,7 +476,7 @@ func _animate_drop(bubble: Area2D) -> void:
 
 
 # ==================================================
-# WIN
+# WIN (UPDATED LOGIC)
 # ==================================================
 
 func check_win() -> void:
@@ -483,11 +485,16 @@ func check_win() -> void:
 			var bubble: Area2D = grid[row][column] as Area2D
 			if bubble != null:
 				return
-	print("LEVEL COMPLETE!")
+				
+	# If no bubbles are left on the grid, instantiate the complete screen
+	var win_screen = LEVEL_COMPLETE_SCENE.instantiate()
+	
+	# Add it to the current active scene (which will overlay it on top of the game UI)
+	get_tree().current_scene.add_child(win_screen)
 
 
 # ==================================================
-# CLEAR BOARD (FIXED)
+# CLEAR BOARD
 # ==================================================
 
 func clear_board() -> void:

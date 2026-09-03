@@ -1,0 +1,245 @@
+[gd_scene format=3 uid="uid://cbxgajl1u75k"]
+
+[ext_resource type="Script" uid="uid://c15kc1jv6cejw" path="res://scripts/level_complete.gd" id="1_1e78d"]
+[ext_resource type="FontFile" uid="uid://cnj87afgw8qyp" path="res://Fonts/LilitaOne-Regular.ttf" id="2_2e2w2"]
+[ext_resource type="Texture2D" uid="uid://b06fxrcdhwciv" path="res://assets/circle-outline-128.png" id="3_jv7kj"]
+[ext_resource type="StyleBox" uid="uid://c4xm5rqj08u42" path="res://styles/menu_button_style.tres" id="3_rovvh"]
+[ext_resource type="Texture2D" uid="uid://8noo8el1be31" path="res://assets/grey-circle-outline-128.png" id="4_1e78d"]
+[ext_resource type="Texture2D" uid="uid://b3jdla02e2lde" path="res://assets/Home_Icon.png" id="5_w7a7f"]
+[ext_resource type="Texture2D" uid="uid://cfk81r7h6o4c6" path="res://assets/bubbles/red.png" id="6_nkf6u"]
+[ext_resource type="Texture2D" uid="uid://sgb4vtafcg7v" path="res://assets/bubbles/blue.png" id="7_yuqio"]
+[ext_resource type="Texture2D" uid="uid://bi05rdtnpjy3c" path="res://assets/bubbles/purple.png" id="8_jyx0s"]
+
+[sub_resource type="Gradient" id="Gradient_gee14"]
+colors = PackedColorArray(0, 0.122595854, 0.3731352, 1, 0.0033645032, 0.016225923, 0.08472269, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4x1ak"]
+gradient = SubResource("Gradient_gee14")
+fill = 1
+fill_from = Vector2(0.5, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbdj3"]
+bg_color = Color(0.007843138, 0.06666667, 0.22745098, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.07450981, 0.16078432, 0.42352942, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+corner_detail = 20
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_size = 20
+shadow_offset = Vector2(10, 10)
+
+[node name="Level Complete" type="Control" unique_id=517219805]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1e78d")
+
+[node name="ColorRect" type="TextureRect" parent="." unique_id=1859323200]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_4x1ak")
+
+[node name="Panel2" type="Panel" parent="." unique_id=912258773]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -191.0
+offset_right = 257.5
+offset_bottom = 393.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbdj3")
+
+[node name="NextButton" type="Button" parent="." unique_id=473988851]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = 139.0
+offset_right = 191.0
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_2e2w2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_rovvh")
+theme_override_styles/pressed = ExtResource("3_rovvh")
+theme_override_styles/hover = ExtResource("3_rovvh")
+theme_override_styles/focus = ExtResource("3_rovvh")
+text = "NEXT"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2145240007]
+custom_maximum_size = Vector2(47, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = 293.0
+offset_right = 23.5
+offset_bottom = 341.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_w7a7f")
+stretch_mode = 5
+
+[node name="HomeButton" type="TextureButton" parent="." unique_id=1030041742]
+modulate = Color(0.023529412, 0.2, 0.5372549, 0.45882353)
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 253.0
+offset_right = 64.0
+offset_bottom = 381.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_jv7kj")
+texture_pressed = ExtResource("3_jv7kj")
+texture_disabled = ExtResource("4_1e78d")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="." unique_id=1265008101]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = 72.0
+offset_right = 123.0
+offset_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.5137255, 0.6117647, 0.9411765, 1)
+theme_override_font_sizes/font_size = 30
+text = "Level completed!"
+
+[node name="Label2" type="Label" parent="." unique_id=756419105]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -112.0
+offset_right = 197.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_2e2w2")
+theme_override_font_sizes/font_size = 90
+text = "VICTORY!"
+
+[node name="Control" type="Control" parent="." unique_id=1438378134]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Control" unique_id=525227254]
+custom_maximum_size = Vector2(140, 140)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -248.0
+offset_right = -26.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_nkf6u")
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="Control" unique_id=919675316]
+custom_maximum_size = Vector2(140, 140)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 26.0
+offset_top = -248.0
+offset_right = 166.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_yuqio")
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=564522315]
+custom_maximum_size = Vector2(180, 180)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -301.0
+offset_right = 90.0
+offset_bottom = -121.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_jyx0s")
+stretch_mode = 5
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=114072755]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = 12.0
+offset_right = 90.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.64705884, 0, 1)
+theme_override_fonts/font = ExtResource("2_2e2w2")
+theme_override_font_sizes/font_size = 35
+text = "SCORE: 290"
