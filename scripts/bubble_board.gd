@@ -466,7 +466,17 @@ func drop_floating_bubbles() -> void:
 	if drop_count > 0:
 		GameManager.add_score(drop_count * 20)
 
+# ==================================================
+# DROP FLOATING BUBBLES
+# ==================================================
+
 func _animate_drop(bubble: Area2D) -> void:
+	# 1. Move the bubble out of the main 'Bubbles' container so the 
+	# deadline script and launcher hit-detection completely ignore it.
+	if is_instance_valid(bubble) and bubble.get_parent() == bubbles_container:
+		bubble.reparent(self)
+	
+	# 2. Play the falling animation
 	var tween: Tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(bubble, "position:y", bubble.position.y + 600.0, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)

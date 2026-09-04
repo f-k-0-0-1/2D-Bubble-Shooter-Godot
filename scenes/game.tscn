@@ -101,6 +101,7 @@ vertical_alignment = 1
 
 [node name="Control" type="Control" parent="." unique_id=1210400862]
 layout_mode = 1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -109,6 +110,8 @@ offset_left = -360.0
 offset_top = -1280.0
 offset_right = -320.0
 offset_bottom = -1240.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="Deadline" type="Area2D" parent="Control" unique_id=1194850566]
 position = Vector2(551, 47)
